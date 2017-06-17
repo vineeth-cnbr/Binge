@@ -3,6 +3,17 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 
+
+// addictional code
+app.set('port', (process.env.PORT || 5000));
+
+app.use(express.static(__dirname + '/public'));
+
+// views is directory for all template files
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+// the code ends here
+
 router.use(function (req,res,next) {
   console.log("/" + req.method);
   next();
