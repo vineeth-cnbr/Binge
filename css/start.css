@@ -1,5 +1,7 @@
 body {
-  padding-top: 50px;
+  padding: 70px;
+  margin:50px;
+  color: #5a5a5a;
 }
 .starter-template {
   padding: 40px 15px;
@@ -8,11 +10,6 @@ body {
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
-
-body {
-  padding-bottom: 40px;
-  color: #5a5a5a;
-}
 
 
 /* CUSTOMIZE THE NAVBAR
