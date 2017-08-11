@@ -2,10 +2,11 @@
   "name": "website-using-express",
   "version": "0.0.1",
   "scripts": {
-    "start": "nodemon Server.js"
+    "start": "nodemon  Server.js"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongojs": "^2.4.0"
   },
   "main": "Server.js",
   "directories": {
