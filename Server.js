@@ -1,15 +1,14 @@
-var express = require("express");
-var app = express();
-var path = __dirname + '/views/';
-var router = express.Router();
+var express = require("express"),
+    app = express(),
+    path = __dirname + '/views/',
+    router = express.Router(),
+    MongoClient = require('mongodb').MongoClient;
 
 
 // addictional code
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-
-
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
@@ -23,25 +22,30 @@ router.use(function (req,res,next) {
   next();
 });
 
-router.get("/",function(req,res){
-  res.sendFile(path + "index.html");
-});
+MongoClient.connect('mongodb://localhost:27017/Binge', function(err, db) {
 
-router.get("/About",function(req,res){
-  res.sendFile(path + "about.html");
-});
+  router.get("/",function(req,res){
 
-router.get("/Login",function(req,res){
-  res.sendFile(path + "login.html");
-});
+    db.collection('About').find().toArray(function(err, docs) {
+        res.render('index', { About: docs } );
+    });
+    //res.sendFile(path + "index.html");
+  });
 
+  router.get("/About",function(req,res){
+    res.sendFile(path + "about.html");
+  });
 
-app.use("*",function(req,res){
-  res.sendFile(path + "404.html");
-});
+  router.get("/Login",function(req,res){
+    res.sendFile(path + "login.html");
+  });
 
+  app.use("*",function(req,res){
+    res.sendFile(path + "404.html");
+  });
 
+  app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+  });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
 });
