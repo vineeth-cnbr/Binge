@@ -25,10 +25,15 @@ router.use(function (req,res,next) {
 MongoClient.connect('mongodb://localhost:27017/Binge', function(err, db) {
 
   router.get("/",function(req,res){
-
+  if(!err) {
     db.collection('About').find().toArray(function(err, docs) {
         res.render('index', { About: docs } );
     });
+  }
+  else {
+    res.render('index');
+  }
+
     //res.sendFile(path + "index.html");
   });
 
@@ -39,6 +44,10 @@ MongoClient.connect('mongodb://localhost:27017/Binge', function(err, db) {
   router.get("/Login",function(req,res){
     res.sendFile(path + "login.html");
   });
+
+  router.get("/tv", function(req,res) {
+    res.render('tv');
+  })
 
   app.use("*",function(req,res){
     res.sendFile(path + "404.html");
